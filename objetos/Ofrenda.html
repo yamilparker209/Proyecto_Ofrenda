@@ -1,0 +1,223 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title>Chocolate</title>
+</head>
+<body>
+    
+<canvas id="myCanvas">
+    <!--El elemento HTML canvas se puede utilizar para dibujar gráficos a través de 
+        secuencias de comandos (por lo general JavaScript ).-->
+</canvas>
+
+<!-- Aquí va todo el código de three.js -->
+<!-- script type="importmap" importa las librerías necesarias para three.js-->
+<script type="importmap"> 
+    {
+        "imports":{
+            "three": "./js/three.module.js",
+            "three/OrbitControls": "./js/OrbitControls.js" 
+        }
+}
+</script>
+<script type="module"> 
+
+//🗃️🗃️ Mandar llamar a la librería
+    import * as THREE from 'three'; 
+    import {OrbitControls} from 'three/OrbitControls';
+    console.log(OrbitControls);
+    
+
+    import {TextGeometry} from"./js/TextGeometry.js";
+    import {FontLoader} from"./js/FontLoader.js";
+
+    import{RoundedBoxGeometry} from"./js/RoundedBoxGeometry.js"
+
+//🕹️🕹️ Renderer - Realiza una conexión entre el código y el canvas
+    var renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('myCanvas'), antialias: true,
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x383838);
+
+
+// 🎬 Creando nueva escena - Es el espacio donde se colocan los objetos
+    var scene = new THREE.Scene();
+
+//🎥🎥 Agregar una cámara de perspectiva
+
+
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+    };
+    var camera = new THREE.PerspectiveCamera(70,window.innerWidth / window.innerHeight,0.1,2000
+      );
+    scene.add(camera);
+
+    //Settings de la cámara
+    camera.position.set(0,10,80);
+
+    // Añadiendo los OrbitControls
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+
+//Background
+
+var loader=new THREE.TextureLoader();
+var bgTexture=loader.load("./Fotos/Atardecer.jpg");
+scene.background=bgTexture;
+
+//Luz
+
+var luz=new THREE.AmbientLight(0xFFFFFF,.7);
+    luz.position.set(0,40,70)
+    scene .add(luz);
+
+//Plano
+
+var geometry1=new THREE.BoxGeometry(120,.2,120);
+var texture1=new THREE.TextureLoader().load("./Fotos/Piedras.jpg")
+var material1=new THREE.MeshLambertMaterial({map:texture1});
+var Terreno=new THREE.Mesh(geometry1,material1);
+scene.add(Terreno);
+Terreno.receiveShadow= true;
+
+texture1.wrapS=THREE.RepeatWrapping;
+texture1.wrapT=THREE.RepeatWrapping;
+texture1.repeat.set(3.5,3.5)
+
+//Objetos 3D
+
+var geometry02=new THREE.BoxGeometry(80,4,80);
+var texture02=new THREE.TextureLoader().load("./Fotos/Piramide.jpg")
+var material02=new THREE.MeshLambertMaterial({map:texture02});
+var Piramide=new THREE.Mesh(geometry02,material02);
+//scene.add(Piramide);
+Piramide.position.set(0,2,-15);
+Piramide.castShadow=true;
+
+texture02.wrapS=THREE.RepeatWrapping;
+texture02.wrapT=THREE.RepeatWrapping;
+texture02.repeat.set(2,.2)
+
+var geometry03=new THREE.BoxGeometry(80,.2,80);
+var texture03=new THREE.TextureLoader().load("./Fotos/Piramide.jpg")
+var material03=new THREE.MeshLambertMaterial({map:texture03});
+var Piramide02=new THREE.Mesh(geometry03,material03);
+//scene.add(Piramide02);
+Piramide02.position.set(0,4.11,-15);
+Piramide02.castShadow=true;
+
+texture03.wrapS=THREE.RepeatWrapping;
+texture03.wrapT=THREE.RepeatWrapping;
+texture03.repeat.set(2,2)
+
+var Piso01=new THREE.Group();
+Piso01.add(Piramide,Piramide02);
+scene.add(Piso01);
+
+var geometry04=new THREE.BoxGeometry(60,4,60);
+var texture04=new THREE.TextureLoader().load("./Fotos/Piramide.jpg");
+var material04=new THREE.MeshLambertMaterial({map:texture04});
+var Piramide03=new THREE.Mesh(geometry04,material04);
+//scene.add(Piramide03);
+Piramide03.position.set(0,6,-15);
+Piramide03.castShadow=true;
+
+texture04.wrapS=THREE.RepeatWrapping;
+texture04.wrapT=THREE.RepeatWrapping;
+texture04.repeat.set(2,.2)
+
+var geometry05=new THREE.BoxGeometry(60,.2,60);
+var texture05=new THREE.TextureLoader().load("./Fotos/Piramide.jpg");
+var material05=new THREE.MeshLambertMaterial({map:texture05});
+var Piramide04=new THREE.Mesh(geometry05,material05);
+//scene.add(Piramide04);
+Piramide04.position.set(0,8.11,-15);
+Piramide04.castShadow=true;
+
+texture05.wrapS=THREE.RepeatWrapping;
+texture05.wrapT=THREE.RepeatWrapping;
+texture05.repeat.set(.8,2)
+
+var Piso02=new THREE.Group();
+Piso02.add(Piramide03,Piramide04);
+scene.add(Piso02)
+
+
+var geometry06=new THREE.BoxGeometry(40,4,40);
+var texture06=new THREE.TextureLoader().load("./Fotos/Piramide.jpg");
+var material06=new THREE.MeshLambertMaterial({map:texture06});
+var Piramide05=new THREE.Mesh(geometry06,material06);
+//scene.add(Piramide05);
+Piramide05.position.set(0,10,-15);
+Piramide05.castShadow=true;
+
+texture06.wrapS=THREE.RepeatWrapping;
+texture06.wrapT=THREE.RepeatWrapping;
+texture06.repeat.set(.8,.2)
+
+
+var geometry07=new THREE.BoxGeometry(40,.2,40);
+var texture07=new THREE.TextureLoader().load("./Fotos/Piramide.jpg");
+var material07=new THREE.MeshLambertMaterial({map:texture07});
+var Piramide06=new THREE.Mesh(geometry07,material07);
+//scene.add(Piramide06);
+Piramide06.position.set(0,12.11,-15);
+Piramide06.castShadow=true;
+
+texture06.wrapS=THREE.RepeatWrapping;
+texture06.wrapT=THREE.RepeatWrapping;
+texture06.repeat.set(.8,.2)
+
+var Piso03=new THREE.Group();
+Piso03.add(Piramide05,Piramide06);
+scene.add(Piso03)
+
+
+var geometry08=new THREE.BoxGeometry(20,4,20);
+var texture08=new THREE.TextureLoader().load("./Fotos/Piramide.jpg");
+var material08=new THREE.MeshLambertMaterial({map:texture08});
+var Piramide07=new THREE.Mesh(geometry08,material08);
+scene.add(Piramide07);
+Piramide07.position.set(0,14,-15);
+Piramide07.castShadow=true;
+
+texture08.wrapS=THREE.RepeatWrapping;
+texture08.wrapT=THREE.RepeatWrapping;
+texture08.repeat.set(.8,.2)
+
+
+var geometry09=new THREE.BoxGeometry(20,.2,20);
+var texture09=new THREE.TextureLoader().load("./Fotos/Piramide.jpg");
+var material09=new THREE.MeshLambertMaterial({map:texture09});
+var Piramide08=new THREE.Mesh(geometry09,material09);
+scene.add(Piramide08);
+Piramide08.position.set(0,16.11,-15);
+Piramide08.castShadow=true;
+
+texture09.wrapS=THREE.RepeatWrapping;
+texture09.wrapT=THREE.RepeatWrapping;
+texture09.repeat.set(.5,.5);
+
+
+//🎰🎰Rendering y animación
+    requestAnimationFrame(render);
+    function render() {
+
+    //🪄🪄 Animación - 
+
+    //🎮🎮Actualización del OrbitControls para generar la suavidad de movimiento
+    controls.update();
+
+    //Llamado para renderizar y volver a llamar a la misma función (render)
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+    }
+</script>
+</body>
+</html>
