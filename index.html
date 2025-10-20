@@ -67,7 +67,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
     controls.dampingFactor = 0.05;
 //fondo
  var loader = new THREE.TextureLoader();
- var bgTexture = loader.load("Fotos/noc.jpg");
+ var bgTexture = loader.load("fotos/noc.jpg");
  scene.background = bgTexture;
 
 // Espacio para colocar los objetos
@@ -81,7 +81,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 
     //Plano
     var plano = new THREE.BoxGeometry(300,0.5,700);
-    var textura1=new THREE.TextureLoader().load("Fotos/sempa.jpg");
+    var textura1=new THREE.TextureLoader().load("fotos/sempa.jpg");
     var material1=new THREE.MeshLambertMaterial({map:textura1});
     var mesh1 = new THREE.Mesh(plano,material1);
     mesh1.position.set(45,-10,120);
@@ -95,7 +95,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 
 //cubo 1
     var geometry = new THREE.BoxGeometry(70,10,90);
-    var texture=new THREE.TextureLoader().load("Fotos/pira.jpg");
+    var texture=new THREE.TextureLoader().load("fotos/pira.jpg");
     var material=new THREE.MeshLambertMaterial({map:texture});
     var mesh = new THREE.Mesh(geometry,material);
     mesh.position.set(0,-5,0);
@@ -483,6 +483,7 @@ window.addEventListener('resize', () => {
 </body>
 
 </html>
+
 
 
 
