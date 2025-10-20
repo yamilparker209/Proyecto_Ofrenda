@@ -81,7 +81,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 
     //Plano
     var plano = new THREE.BoxGeometry(300,0.5,700);
-    var textura1=new THREE.TextureLoader().load("fotos/sempa.jpg");
+    var textura1=new THREE.TextureLoader().load("fotos/sempa.JPG");
     var material1=new THREE.MeshLambertMaterial({map:textura1});
     var mesh1 = new THREE.Mesh(plano,material1);
     mesh1.position.set(45,-10,120);
@@ -481,4 +481,5 @@ window.addEventListener('resize', () => {
 
 </script>
 </body>
+
 </html>
